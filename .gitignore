@@ -1,0 +1,6 @@
+.DS_Store
+dataset.pickle
+*.pyc
+logs/
+sampleimages/**/*.jpg
+
