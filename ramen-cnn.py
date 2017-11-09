@@ -19,20 +19,13 @@ class MyModel(Chain):
 			cn1 = L.Convolution2D(3,20,5), # size : 160 - 5 + 1 = 156 
 			cn2 = L.Convolution2D(20, 50, 5), # size : 52 - 5  + 1 = 48
 			l1 = L.Linear(800, 100),#45 * 45 * 50
-			# cn1 = L.Convolution2D(1,20,5), # size : 160 - 5 + 1 = 156 , 20 * 3 | (60, 156, 156)
-			# cn2 = L.Convolution2D(20,50,5), # size : 39 - 5 + 1 = 35 | (60, 35, 35)
-			# l1 = L.Linear(50, 25),
 			l2 = L.Linear(100, 7),
 			)
-	#def __call__(self, x, t):
-	#	return F.softmax_cross_entropy(self.fwd(x), t)
+
 
 	def __call__(self, x):
-		#print(x.data)
-		#print(x.data.shape)
-		#print(x.get_example())
-		h1 = F.max_pooling_2d(F.relu(self.cn1(x)), 4) # pool1: 55 - 4 + 1 = 52
-		h2 = F.max_pooling_2d(F.relu(self.cn2(h1)), 4) # pool2: 48 - 4 + 1 = 45
+		h1 = F.max_pooling_2d(F.relu(self.cn1(x)), 8) 
+		h2 = F.max_pooling_2d(F.relu(self.cn2(h1)), 8) 
 		h3 = F.dropout(F.relu(self.l1(h2)))
 		return self.l2(h3)
 
